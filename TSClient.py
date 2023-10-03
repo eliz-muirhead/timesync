@@ -54,10 +54,10 @@ class TSClient:
         self.output_results(delay)
 
     def calculate_delay(self):
-        return (self.t4 - self.t1) - (self.t3 - self.t2)
+        return ((self.t4 - self.t1) - (self.t3 - self.t2)) * 1000
 
     def calculate_offset(self):
-        return ((self.t2 - self.t1) + (self.t3 - self.t4)) / 2
+        return (((self.t2 - self.t1) + (self.t3 - self.t4)) / 2) * 1000
 
     # sets our local time to match server time
     def adjust_client_clock(self, offset):
