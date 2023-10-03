@@ -61,7 +61,7 @@ class TSClient:
 
     # sets our local time to match server time
     def adjust_client_clock(self, offset):
-        self.synchronized_local_time = time.time() + offset
+        self.synchronized_local_time = time.time() + (offset/1000)
 
     def output_results(self, delay):
         print(f'REMOTE_TIME {int(self.synchronized_local_time)}')
