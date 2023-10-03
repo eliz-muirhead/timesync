@@ -64,9 +64,9 @@ class TSClient:
         self.synchronized_local_time = time.time() + offset
 
     def output_results(self, delay):
-        print(f'REMOTE_TIME {self.synchronized_local_time}')
-        print(f'LOCAL_TIME {time.time()}', )
-        print(f'RTT_ESTIMATE {delay}')
+        print(f'REMOTE_TIME {int(self.synchronized_local_time)}')
+        print(f'LOCAL_TIME {int(time.time())}', )
+        print(f'RTT_ESTIMATE {int(delay)}')
 
 
 if __name__ == "__main__":
