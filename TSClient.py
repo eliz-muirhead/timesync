@@ -21,6 +21,8 @@ class TSClient:
         self.clientSocket = socket(AF_INET, SOCK_STREAM)
         self.clientSocket.connect((self.serverName, self.serverPort))
 
+        # local time
+        self.unsynchronized_local_time = None
         # local time after it has been adjusted to match the server
         self.synchronized_local_time = None
 
@@ -57,15 +59,16 @@ class TSClient:
         return ((self.t4 - self.t1) - (self.t3 - self.t2)) * 1000
 
     def calculate_offset(self):
-        return ((self.t2 - self.t1) + (self.t3 - self.t4)) / 2
+        return (((self.t2 - self.t1) + (self.t3 - self.t4)) / 2) * 1000
 
     # sets our local time to match server time
     def adjust_client_clock(self, offset):
+        self.unsynchronized_local_time = time.time()
         self.synchronized_local_time = time.time() + offset
 
     def output_results(self, delay):
         print(f'REMOTE_TIME {int(self.synchronized_local_time)}')
-        print(f'LOCAL_TIME {int(time.time())}', )
+        print(f'LOCAL_TIME {int(self.unsynchronized_local_time)}', )
         print(f'RTT_ESTIMATE {int(delay)}')
 
 
